@@ -43,19 +43,29 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: 'Invalid credentials' });
+    if (!user) return res.status(400).json({ msg: 'User not exist' });
 
     if (!user.isVerified) return res.status(403).json({ msg: 'User is not verified' });
 
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch =  bcrypt.compare(password, user.password); // ✅ FIXED
     if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
-    res.status(200).json({ token });
+
+    res
+      .cookie('token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'Strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+      })
+      .status(200)
+      .json({ token }); // ✅ FIXED: return token for frontend
   } catch (err) {
     res.status(500).json({ msg: 'Login failed', error: err.message });
   }
 };
+
 
 export const getCurrentUser = async (req, res) => {
   try {
@@ -139,12 +149,17 @@ export const updatePassword = async (req, res) => {
 
 export const logoutUser = async (req, res) => {
   try {
-    // On the client side, just remove the token
+    res.clearCookie('token', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'Strict'
+    });
     res.status(200).json({ msg: 'Logout successful' });
   } catch (err) {
     res.status(500).json({ msg: 'Logout failed', error: err.message });
   }
 };
+
 
 export const verifyOtp = async (req, res) => {
   try {

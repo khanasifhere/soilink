@@ -17,7 +17,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin:'http://localhost:5173',
   credentials: true,
 }));
 app.use(express.json());
@@ -33,9 +33,9 @@ import orderRoutes from './routes/orderRoutes.js';
 
 app.use('/api/auth', authRoutes);
 app.use('/api/land', landRoutes);
-app.use('/api/crops', cropRoutes);
-app.use('/api/rentals', rentalRoutes);
-app.use('/api/orders', orderRoutes);
+app.use('/api/crop', cropRoutes);
+app.use('/api/rental', rentalRoutes);
+app.use('/api/order', orderRoutes);
 
 // Default Route
 app.get('/', (req, res) => {

@@ -7,7 +7,7 @@ export const placeOrder = async (req, res) => {
 
 export const getUserOrders = async (req, res) => {
   const orders = await Order.find({ buyerId: req.user.id });
-  res.status(200).json(orders);
+  res.status(200).json({orders});
 };
 
 export const getFarmerOrders = async (req, res) => {
@@ -15,7 +15,8 @@ export const getFarmerOrders = async (req, res) => {
     path: 'cropId',
     match: { farmerId: req.user.id }
   });
-  res.status(200).json(orders.filter(o => o.cropId));
+  const orde = orders.filter(o => o.cropId); // Filter out orders without crops
+  res.status(200).json({orde});
 };
 
 export const updateOrderStatus = async (req, res) => {

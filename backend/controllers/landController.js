@@ -11,12 +11,12 @@ export const createLand = async (req, res) => {
 
 export const getAllLands = async (req, res) => {
   const lands = await Land.find({ isAvailable: true });
-  res.status(200).json(lands);
+  res.status(200).json({lands});
 };
 
 export const getFarmerLands = async (req, res) => {
   const lands = await Land.find({ farmerId: req.user.id });
-  res.status(200).json(lands);
+  res.status(200).json({lands});
 };
 
 export const updateLandStatus = async (req, res) => {

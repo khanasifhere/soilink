@@ -7,15 +7,20 @@ export const createRentalRequest = async (req, res) => {
 
 export const getUserRentals = async (req, res) => {
   const rentals = await Rental.find({ userId: req.user.id });
-  res.status(200).json(rentals);
+  res.status(200).json({rentals});
 };
+// export const getAllRentals = async (req, res) => {
+//   const rentals = await Rental.find();
+//   res.status(200).json({rentals});
+// };
 
 export const getFarmerRentalRequests = async (req, res) => {
   const rentals = await Rental.find().populate({
     path: 'landId',
     match: { farmerId: req.user.id }
   });
-  res.status(200).json(rentals.filter(r => r.landId));
+  const ren=rentals.filter(r => r.landId);
+  res.status(200).json({ren});
 };
 
 export const updateRentalStatus = async (req, res) => {

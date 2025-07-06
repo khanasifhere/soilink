@@ -7,12 +7,12 @@ export const createCrop = async (req, res) => {
 
 export const getAllCrops = async (req, res) => {
   const crops = await Crop.find({ isAvailable: true });
-  res.status(200).json(crops);
+  res.status(200).json({crops});
 };
 
 export const getFarmerCrops = async (req, res) => {
   const crops = await Crop.find({ farmerId: req.user.id });
-  res.status(200).json(crops);
+  res.status(200).json({crops});
 };
 
 export const updateCropAvailability = async (req, res) => {

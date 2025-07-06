@@ -17,4 +17,4 @@ router.post('/create', verifyToken(['farmer']), createCrop);
 router.get('/my-crops', verifyToken(['farmer']), getFarmerCrops);
 router.put('/:cropId/status', verifyToken(['farmer']), updateCropAvailability);
 
-export default router;
+export default  router;
