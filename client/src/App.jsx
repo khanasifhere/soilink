@@ -13,6 +13,14 @@ import AddLand from './pages/AddLand.jsx';
 import MyLands from './pages/MyLands.jsx';
 import IncomingOrders from './pages/IncomingOrders.jsx';
 import IncomingRentals from './pages/IncomingRentals.jsx'; // Assuming this is the same component
+import LandsPage from './pages/LandsPage.jsx';
+import RentalFormPage from './pages/RentalFormPage.jsx'; // Assuming this is the same component
+import MyRentalsPage from './pages/MyRentalsPage';
+import CropsPage from './pages/CropsPage.jsx';
+import OrderFormPage from './pages/OrderFormPage';
+import MyOrdersPage from './pages/MyOrdersPage';
+
+
 
 const App = () => (
   <Routes>
@@ -30,6 +38,17 @@ const App = () => (
     <Route path="/my-lands" element={<MyLands />} /> {/* Assuming this is the same component */}
     <Route path="/orders" element={<IncomingOrders />} /> {/* Fallback route */}
     <Route path="/rentals" element={<IncomingRentals />} /> {/* Fallback to Home for unmatched routes */}
+    <Route path="/lands" element={<LandsPage />} />
+    <Route path="/rent/:landId/:price" element={<RentalFormPage />} />
+    <Route path="/my-rentals" element={<MyRentalsPage />} />
+<Route path="/crops" element={<CropsPage />} />
+<Route path="/order/:cropId/:price" element={<OrderFormPage />} />
+
+<Route path="/my-orders" element={<MyOrdersPage />} />
+
+
+
+
   </Routes>
 );
 

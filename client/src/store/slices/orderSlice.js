@@ -81,7 +81,7 @@ export const getUserOrders = () => async (dispatch) => {
         Authorization: `Bearer ${token}`
       }
     });
-    dispatch(setUserOrders(res.data)); // ✅ res.data is the array
+    dispatch(setUserOrders(res.data.orders)); // ✅ res.data is the array
   } catch (err) {
     dispatch(fail(err.response?.data?.message || 'Failed to get user orders'));
   }

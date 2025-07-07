@@ -8,6 +8,7 @@ export const createRentalRequest = async (req, res) => {
 export const getUserRentals = async (req, res) => {
   const rentals = await Rental.find({ userId: req.user.id });
   res.status(200).json({rentals});
+  console.log(rentals);
 };
 // export const getAllRentals = async (req, res) => {
 //   const rentals = await Rental.find();
