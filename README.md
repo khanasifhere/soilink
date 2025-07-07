@@ -53,5 +53,38 @@ Backend: [https://soilink.onrender.com](https://soilink.onrender.com)
 | **Vercel** | Hosting the frontend |
 
 ---
+## 🔧 Installation & Setup
+1. **Clone the repository**
+```bash
+https://github.com/khanasifhere/soilink.git
+```
+2. **Navigate to the project directory**
+```bash
+cd soilink
+```
+3. **Install dependencies**
+```bash
+npm install
+```
+4. **Configure environment variables**
+Create a `.env` file in the root directory and add your environment variables as shown below:
+```
+MONGODB_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+```
+5. **Run the application**
+```bash
+npm run dev
+```
+The application will start at `http://localhost:3000`
+
+## 🤝 Contributing
+Contributions are welcome! Please fork this repository and submit a pull request for review.
+
+## 📜 License
+This project is licensed under the MIT License.
+
+## 📧 Contact
+If you have any questions or suggestions, feel free to reach out at `khanaasif1065@gmail.com`.
 
 
