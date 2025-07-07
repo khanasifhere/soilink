@@ -2,10 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserOrders } from '../store/slices/orderSlice';
 import Header from '../components/Header';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 const MyOrdersPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userOrders, loading, error } = useSelector((state) => state.order);
 const user = useSelector((state) => state.auth.user);
 useEffect(() => {
@@ -15,7 +16,7 @@ useEffect(() => {
     if(user && user.role !== 'user') {
       navigate('/farmer-dashboard'); // Redirect if user is not a farmer
     }
-  }, [user]);
+  }, [user,navigate]);
   useEffect(() => {
     dispatch(getUserOrders());
   }, [dispatch]);
@@ -42,7 +43,7 @@ useEffect(() => {
             <p className="text-gray-600">Loading your orders...</p>
           ) : error ? (
             <p className="text-red-500">{error}</p>
-          ) : userOrders.length === 0 ? (
+          ) : userOrders&&userOrders.length === 0 ? (
             <p className="text-gray-600">You have not placed any orders yet.</p>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

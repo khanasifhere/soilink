@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserRentals } from '../store/slices/rentalSlice';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 
 const MyRentalsPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { userRentals, loading, error } = useSelector((state) => state.rental);
 const user = useSelector((state) => state.auth.user);
 useEffect(() => {

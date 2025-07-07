@@ -87,7 +87,7 @@ export default authSlice.reducer;
 // ACTIONS (same file)
 // =======================
 
-const API = 'http://localhost:4000/api/auth';
+const API = 'https://soilink.onrender.com/api/auth';
 
 export const register = (data) => async (dispatch) => {
   dispatch(requestStart());
