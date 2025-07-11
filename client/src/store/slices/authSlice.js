@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Load user from localStorage
+// Helper to safely parse localStorage JSON
 function safeJSONParse(item) {
   try {
     return JSON.parse(item);
@@ -39,11 +39,11 @@ const authSlice = createSlice({
     },
     registerSuccess: (state, action) => {
       state.loading = false;
-      state.message = action.payload.message;
+      state.message = action.payload.msg;
     },
     otpVerificationSuccess: (state, action) => {
       state.loading = false;
-      state.message = action.payload.message;
+      state.message = action.payload.msg;
       state.user = action.payload.user;
       state.isAuthenticated = true;
       localStorage.setItem('user', JSON.stringify(action.payload.user));
@@ -62,6 +62,23 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       localStorage.removeItem('user');
     },
+    forgotPasswordSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    resetPasswordSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    updatePasswordSuccess: (state, action) => {
+      state.loading = false;
+      state.message = action.payload;
+    },
+    getCurrentUserSuccess: (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+      state.isAuthenticated = true;
+    },
     resetAuth: (state) => {
       state.loading = false;
       state.error = null;
@@ -78,14 +95,18 @@ export const {
   otpVerificationSuccess,
   loginSuccess,
   logoutSuccess,
+  forgotPasswordSuccess,
+  resetPasswordSuccess,
+  updatePasswordSuccess,
+  getCurrentUserSuccess,
   resetAuth,
 } = authSlice.actions;
 
 export default authSlice.reducer;
 
-// =======================
-// ACTIONS (same file)
-// =======================
+// =========================
+//       THUNKS / ACTIONS
+// =========================
 
 const API = 'https://soilink.onrender.com/api/auth';
 
@@ -99,11 +120,11 @@ export const register = (data) => async (dispatch) => {
   }
 };
 
-export const otpVerification = ({ email, otp }) => async (dispatch) => {
+export const otpVerification = (data) => async (dispatch) => {
   dispatch(requestStart());
   try {
-    const res = await axios.post(`${API}/verify-otp`, { email, otp });
-    dispatch(otpVerificationSuccess(res.data));
+    const res = await axios.post(`${API}/verify-otp`, data);
+    dispatch(otpVerificationSuccess({ msg: res.data.msg, user: res.data.user }));
   } catch (err) {
     dispatch(requestFail(err.response?.data?.msg || err.message));
   }
@@ -126,12 +147,55 @@ export const login = (data) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   dispatch(requestStart());
   try {
-    await axios.post(`${API}/logout`, { withCredentials: true });
+    await axios.post(`${API}/logout`, {}, { withCredentials: true });
     dispatch(logoutSuccess('Logged out successfully'));
   } catch (err) {
     dispatch(requestFail(err.response?.data?.msg || err.message));
   }
 };
+
+export const forgotPassword = (email) => async (dispatch) => {
+  dispatch(requestStart());
+  try {
+    const res = await axios.post(`${API}/forgot-password`, { email });
+    dispatch(forgotPasswordSuccess(res.data.msg));
+  } catch (err) {
+    dispatch(requestFail(err.response?.data?.msg || err.message));
+  }
+};
+
+export const resetPassword = ({ token, newPassword }) => async (dispatch) => {
+  dispatch(requestStart());
+  try {
+    const res = await axios.post(`${API}/reset-password/${token}`, { newPassword });
+    dispatch(resetPasswordSuccess(res.data.msg));
+  } catch (err) {
+    dispatch(requestFail(err.response?.data?.msg || err.message));
+  }
+};
+
+export const updatePassword = ({ currentPassword, newPassword }) => async (dispatch) => {
+  dispatch(requestStart());
+  try {
+    const res = await axios.put(`${API}/update-password`, { currentPassword, newPassword }, {
+      withCredentials: true,
+    });
+    dispatch(updatePasswordSuccess(res.data.msg));
+  } catch (err) {
+    dispatch(requestFail(err.response?.data?.msg || err.message));
+  }
+};
+
+export const getCurrentUser = () => async (dispatch) => {
+  dispatch(requestStart());
+  try {
+    const res = await axios.get(`${API}/me`, { withCredentials: true });
+    dispatch(getCurrentUserSuccess(res.data));
+  } catch (err) {
+    dispatch(requestFail(err.response?.data?.msg || err.message));
+  }
+};
+
 export const resetAuthState = () => (dispatch) => {
   dispatch(resetAuth());
 };

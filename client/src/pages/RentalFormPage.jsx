@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector } from 'react-redux';
 import { createRentalRequest } from '../store/slices/rentalSlice';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import Header from '../components/Header';
