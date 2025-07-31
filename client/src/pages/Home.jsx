@@ -16,10 +16,6 @@ const Home = () => {
 
   if (isAuthenticated && user) return null;
 
-  const scrollToSection = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50">
       {/* Fixed Header */}
@@ -28,15 +24,16 @@ const Home = () => {
       </header>
 
       {/* Main Content */}
-      <div className="pt-16"> {/* Added pt-16 to account for fixed header */}
+      <div className="pt-16">
         <main className="overflow-hidden">
+
           {/* Hero Section */}
           <section id="home" className="relative pt-24 pb-32 px-6 md:px-12 scroll-mt-24">
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1350&q=80')] bg-cover bg-center opacity-10"></div>
               <div className="absolute inset-0 bg-gradient-to-b from-white/60 to-white/90"></div>
             </div>
-            
+
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -44,10 +41,9 @@ const Home = () => {
               className="relative max-w-6xl mx-auto text-center"
             >
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Cultivating Connections</span> <br />
+                <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Cultivating Connections</span><br />
                 Between Farmers & Consumers
               </h1>
-              
               <motion.p 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -56,7 +52,7 @@ const Home = () => {
               >
                 Soilink bridges the gap between <span className="font-semibold text-emerald-700">farmers</span> and <span className="font-semibold text-emerald-700">consumers</span> through an innovative agriculture platform that benefits everyone.
               </motion.p>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto mb-16">
                 <motion.div 
                   whileHover={{ y: -5 }}
@@ -72,7 +68,7 @@ const Home = () => {
                     <p className="text-gray-600">Maximize your land's potential by renting unused space and selling your harvest directly.</p>
                   </div>
                 </motion.div>
-                
+
                 <motion.div 
                   whileHover={{ y: -5 }}
                   className="bg-white rounded-2xl shadow-xl overflow-hidden border border-green-100"
@@ -91,7 +87,7 @@ const Home = () => {
             </motion.div>
           </section>
 
-          {/* About Section */}
+          {/* About / Features Section */}
           <section id="about" className="py-20 px-6 md:px-12 bg-gradient-to-br from-white to-emerald-50 scroll-mt-24">
             <motion.div 
               initial={{ opacity: 0 }}
@@ -104,7 +100,7 @@ const Home = () => {
                 <span className="inline-block px-4 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-4">Our Features</span>
                 <h2 className="text-4xl font-bold text-gray-900">How Soilink Works</h2>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
                   {
@@ -140,6 +136,44 @@ const Home = () => {
             </motion.div>
           </section>
 
+          {/* ML Crop Predictor Section */}
+          <section id="crop-predictor" className="py-20 px-6 md:px-12 bg-white scroll-mt-24">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="max-w-6xl mx-auto text-center"
+            >
+              <span className="inline-block px-4 py-1 bg-green-100 text-green-800 rounded-full text-sm font-semibold mb-4">
+                Smart Suggestion
+              </span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-4">Find the Best Crop to Grow 🌾</h2>
+              <p className="text-gray-600 max-w-2xl mx-auto mb-8">
+                Use our AI-powered model to get personalized crop recommendations based on your soil nutrients, climate, and rainfall conditions.
+              </p>
+              <a
+                href="https://crop-pred-ml.onrender.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition"
+              >
+                🌱 Try Crop Predictor Tool
+              </a>
+
+              {/* Optional Embed: Uncomment if embedding is supported */}
+              {/* 
+              <div className="mt-10 rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                  src="https://ml-crop-predictor.vercel.app/"
+                  title="ML Crop Predictor"
+                  className="w-full h-[600px] border-2 border-green-100 rounded-lg"
+                />
+              </div>
+              */}
+            </motion.div>
+          </section>
+
           {/* Contact Section */}
           <section id="contact" className="py-20 px-6 md:px-12 bg-white scroll-mt-24">
             <div className="max-w-4xl mx-auto bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl shadow-2xl overflow-hidden">
@@ -147,7 +181,6 @@ const Home = () => {
                 <div className="p-10 text-white">
                   <h2 className="text-3xl font-bold mb-4">Get In Touch</h2>
                   <p className="mb-6 opacity-90">Have questions or need support? Reach out to our team.</p>
-                  
                   <div className="space-y-4">
                     <div className="flex items-start">
                       <div className="flex-shrink-0 mt-1">
@@ -157,10 +190,9 @@ const Home = () => {
                       </div>
                       <div className="ml-3">
                         <p className="text-sm font-medium">Email us at</p>
-                        <a href="mailto:support@soilink.com" className="text-white hover:underline">khanaasif1065@gmail.com</a>
+                        <a href="mailto:khanaasif1065@gmail.com" className="text-white hover:underline">khanaasif1065@gmail.com</a>
                       </div>
                     </div>
-                    
                     <div className="flex items-start">
                       <div className="flex-shrink-0 mt-1">
                         <svg className="h-6 w-6 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -169,29 +201,26 @@ const Home = () => {
                       </div>
                       <div className="ml-3">
                         <p className="text-sm font-medium">Call us at</p>
-                        <a href="tel:+919876543210" className="text-white hover:underline">+91 9672066407</a>
+                        <a href="tel:+919672066407" className="text-white hover:underline">+91 9672066407</a>
                       </div>
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="bg-white p-10">
                   <form className="space-y-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
                       <input type="text" id="name" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" />
                     </div>
-                    
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                       <input type="email" id="email" className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500" />
                     </div>
-                    
                     <div>
                       <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
                       <textarea id="message" rows={4} className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"></textarea>
                     </div>
-                    
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -205,6 +234,7 @@ const Home = () => {
               </div>
             </div>
           </section>
+
         </main>
       </div>
     </div>

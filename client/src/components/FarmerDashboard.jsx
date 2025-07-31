@@ -33,17 +33,36 @@ const FarmerDashboard = () => {
         {/* Main */}
         <main className="flex-1 p-6">
           <h2 className="text-3xl font-semibold text-green-800 mb-4">Welcome, Farmer 👨‍🌾</h2>
-          <p className="text-gray-700">Use the sidebar to manage your land, crops, and orders.</p>
+          <p className="text-gray-700">Manage all your farming activities from one place.</p>
 
-          {/* Dashboard Cards */}
+          {/* Feature Description Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-              <h3 className="text-xl font-bold text-green-700">Total Lands Listed</h3>
-              <p className="text-2xl mt-2 text-gray-800">4</p> {/* Replace with actual count */}
+              <h3 className="text-xl font-bold text-green-700">🌾 Add Land</h3>
+              <p className="mt-2 text-gray-700">
+                List your available land for rent during off-season by visiting the <Link to="/add-land" className="text-green-700 underline hover:text-green-600">Add Land</Link> page.
+              </p>
             </div>
+
             <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
-              <h3 className="text-xl font-bold text-green-700">Crops for Sale</h3>
-              <p className="text-2xl mt-2 text-gray-800">12</p> {/* Replace with actual count */}
+              <h3 className="text-xl font-bold text-green-700">🌱 Add Crops</h3>
+              <p className="mt-2 text-gray-700">
+                Sell your produce directly by adding it to the <Link to="/add-crop" className="text-green-700 underline hover:text-green-600">Add Crop</Link> section.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+              <h3 className="text-xl font-bold text-green-700">📦 Manage Orders</h3>
+              <p className="mt-2 text-gray-700">
+                Track and manage incoming crop orders in the <Link to="/orders" className="text-green-700 underline hover:text-green-600">Orders</Link> section.
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow hover:shadow-md transition">
+              <h3 className="text-xl font-bold text-green-700">📑 Rental Requests</h3>
+              <p className="mt-2 text-gray-700">
+                View land rental requests and manage availability through the <Link to="/rentals" className="text-green-700 underline hover:text-green-600">Rentals</Link> page.
+              </p>
             </div>
           </div>
         </main>

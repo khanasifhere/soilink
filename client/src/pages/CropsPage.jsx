@@ -60,12 +60,11 @@ const CropsPage = () => {
                       className="w-full h-40 object-cover rounded-md mb-3"
                     />
                   )}
-                  <h3 className="text-xl font-semibold text-green-700 mb-1">{crop.name}</h3>
-                  <p><strong>Type:</strong> {crop.type}</p>
-                  <p><strong>Price:</strong> ₹{crop.price} / kg</p>
+                  <h3 className="text-xl font-semibold text-green-700 mb-1">{crop.cropType}</h3>
+                  
+                  <p><strong>Price:</strong> ₹{crop.pricePerKg} / kg</p>
                   <p><strong>Quantity:</strong> {crop.quantity} kg</p>
-                  <p><strong>Available From:</strong> {new Date(crop.availableFrom).toLocaleDateString()}</p>
-                  <p><strong>Available To:</strong> {new Date(crop.availableTo).toLocaleDateString()}</p>
+                  
                   <p className="mt-2 text-sm text-gray-600">
                     <strong>Status:</strong>{' '}
                     {crop.isAvailable ? (
