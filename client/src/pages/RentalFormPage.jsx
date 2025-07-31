@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import { createRentalRequest } from '../store/slices/rentalSlice';
 import { useParams, useNavigate, Link } from 'react-router-dom';
