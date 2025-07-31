@@ -76,7 +76,7 @@ const CropsPage = () => {
 
                   {crop.isAvailable && (
                     <button
-                      onClick={() => navigate(`/order/${crop._id}/${crop.price}`)}
+                      onClick={() => navigate(`/order/${crop._id}/${crop.pricePerKg}`)}
                       className="mt-4 w-full py-2 px-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-md"
                     >
                       Buy Crop

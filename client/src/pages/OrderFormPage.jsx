@@ -22,7 +22,7 @@ useEffect(() => {
   }, [user]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    const totalPrice = quantity * parseFloat(price);
+    const totalPrice = quantity * parseFloat(pricePerKg);
     dispatch(placeOrder({ cropId, quantity, totalPrice }));
     navigate('/my-orders');
   };
@@ -59,7 +59,7 @@ useEffect(() => {
             </div>
 
             <p className="mb-4 text-gray-800">
-              <strong>Total Price:</strong> ₹{quantity * price}
+              <strong>Total Price:</strong> ₹{quantity * pricePerKg}
             </p>
 
             <button
