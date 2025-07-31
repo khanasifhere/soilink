@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import { Link,useNavigate } from 'react-router-dom';
 
 const OrderFormPage = () => {
-  const { cropId, price } = useParams();
+  const { cropId, pricePerKg } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
